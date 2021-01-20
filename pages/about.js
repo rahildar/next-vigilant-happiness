@@ -7,12 +7,13 @@ async function getTodos() {
 
 export default function About({ message, data }) {
   const singleItem = data.results[1];
-  const { data: queryData = [] } = useQuery("results", getTodos);
+  const { data: queryData = [], isLoading } = useQuery("results", getTodos);
 
   return (
     <div>
       About Page - {message}
       <ul>
+        {isLoading && <h4>Loading...</h4>}
         {queryData.map((item) => (
           <li key={item.id}>{item.name}</li>
         ))}
